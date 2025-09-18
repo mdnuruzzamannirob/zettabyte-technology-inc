@@ -3,11 +3,14 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { newQueryClient } from "@/lib/queryClient";
+import { SessionProvider } from "next-auth/react";
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
-    <QueryClientProvider client={newQueryClient()}>
-      {children}
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={newQueryClient()}>
+        {children}
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }
